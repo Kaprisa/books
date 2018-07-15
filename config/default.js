@@ -17,5 +17,8 @@ module.exports = {
         root: defer(function(cfg) {
             return path.join(cfg.root, 'views')
         })
+    },
+    redis: {
+        url: 'redis://127.0.0.1:6379'
     }
 }
