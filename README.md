@@ -2,7 +2,8 @@
 
 ## Установка и запуск
 
-> Настройки в */config/default*
+> Настройки в */config/default*  
+> База данных **MySQL**
 
 ```sh
 $ yarn install
