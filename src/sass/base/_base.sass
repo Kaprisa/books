@@ -1,0 +1,59 @@
+html
+  font-size: 62.5% //1rem=10px
+  @include respond(tab-land)
+    font-size: 56.25% //1rem=9px
+  @include respond(tab-port)
+    font-size: 50% //1rem=8px
+  @include respond(big-desctop)
+    font-size: 75% //1rem=12px
+
+body
+  box-sizing: border-box
+  overflow: hidden
+  @include respond(tab-port)
+    padding: 0
+
+*, *::after, *::before
+  margin: 0
+  padding: 0
+  box-sizing: inherit
+
+::selection
+  background-color: $color-primary
+  color: $color-white
+
+*::-webkit-input-placeholder
+  color: #666
+  opacity: 1
+
+*:-moz-placeholder
+  color: #666
+  opacity: 1
+
+*::-moz-placeholder
+  color: #666
+  opacity: 1
+
+*:-ms-input-placeholder
+  color: #666
+  opacity: 1
+
+body input:focus:required:invalid,
+body textarea:focus:required:invalid
+  color: #666
+body input:required:valid,
+body textarea:required:valid
+  color: #666
+
+.container
+  width: 100vw
+  height: 100vh
+  background-color: $color-light
+
+.back
+  &-wrapper
+    text-align: left
+    color: $color-gray
+  font-size: 1.6rem
+  cursor: pointer
+
