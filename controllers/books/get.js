@@ -1,15 +1,16 @@
 import Book from '../../db/models/Book'
+const { getCached, setCached } = require('../../db/redis')
 
 export default router => {
     router.get('/', async ctx => {
         const query = ctx.request.query
         const condition = query.like ? `title LIKE '${query.like}%'` : 1
-        const books = await Book.get({
-            limit: query ? `LIMIT ${query.offset}, ${query.limit}` : 1,
-            condition,
-            orderBy: query.order || 'created_at',
-            direction: query.direction || 'ASC'
-        })
+        const queryString = `SELECT b.*, u.name FROM books b JOIN users u ON b.author_id=u.id where ${condition} ORDER BY ${query.order || 'created_at'} ${query.direction || 'ASC'} ${query ? `LIMIT ${query.offset}, ${query.limit}` : 1};`
+        let books = await getCached(queryString)
+        if (!books) {
+            books = await Book.get(queryString)
+            await setCached(queryString, JSON.stringify(books))
+        }
         const count = await Book.count({ condition })
         ctx.body = { books, count }
     })

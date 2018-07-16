@@ -1,5 +1,6 @@
 import Book from '../../db/models/Book'
 import User from '../../db/models/User'
+import { flush } from '../../db/redis'
 
 export default router => {
     router.put('/:id', async ctx => {
@@ -16,5 +17,6 @@ export default router => {
         if (fields.author)
             fields.author_id = await User.create({ name: author })
         ctx.body = await Book.update(`id=${ctx.params.id}`, fields)
+        await flush()
     })
 }

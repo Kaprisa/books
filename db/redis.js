@@ -1,13 +1,13 @@
-const redis = require('redis')
-const config = require('config')
-const util = require('util')
-const errorHandler = require('../helpers/errorHandler')
+import redis from 'redis'
+import config from 'config'
+import util from 'util'
+import errorHandler from '../helpers/errorHandler'
 
 const client = redis.createClient(config.redis.url)
 
 client.get = util.promisify(client.get)
 
-exports.getCached = async (key) => {
+export const getCached = async (key) => {
     try {
         const cached = await client.get(key)
         if (cached)
@@ -19,7 +19,7 @@ exports.getCached = async (key) => {
     }
 }
 
-exports.setCached = async (key, data) => {
+export const setCached = async (key, data) => {
     try {
         await client.set(key, JSON.stringify({data}))
     } catch (e) {
@@ -27,7 +27,7 @@ exports.setCached = async (key, data) => {
     }
 }
 
-exports.flush = async _ => {
+export const flush = async _ => {
     try {
         await client.flushdb()
     } catch (e) {

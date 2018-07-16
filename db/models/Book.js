@@ -1,6 +1,5 @@
 const query = require('../connection').query
 const errorHandler = require('../../helpers/errorHandler')
-const { getCached, setCached, flush } = require('../redis')
 
 class Book {
     static getfields() {
@@ -9,7 +8,6 @@ class Book {
     static async create({ title, author_id, description, image, date }) {
         try {
             await query(`INSERT INTO books SET title=?, author_id=?, description=?, image=?, date=?, created_at=?, updated_at=?;`, [title, author_id, description, image, date, 'now()', 'now()'])
-            flush()
             return 'Книга успешно добавлена!'
         } catch (e) {
             errorHandler(e)
@@ -21,22 +19,15 @@ class Book {
         Object.keys(fields).forEach(f => str += `${f}=?, `)
         try {
             await query(`UPDATE books SET ${str}updated_at=? where ${condition};`, [...Object.values(fields), 'now()'])
-            flush()
             return 'Книга успешно обновлена!'
         } catch (e) {
             errorHandler(e)
             return e.message
         }
     }
-    static async get({condition = 1, limit = null, orderBy = 'created_at', direction = 'ASC'}) {
+    static async get(queryString) {
         try {
-            const queryString = `SELECT b.*, u.name FROM books b JOIN users u ON b.author_id=u.id where ${condition} ORDER BY ${orderBy} ${direction} ${limit ? limit : ''};`
-            const cachedBooks = await getCached(queryString)
-            if (cachedBooks)
-                return cachedBooks
-            const books = await query(queryString)
-            setCached(queryString, JSON.stringify(books))
-            return books
+            return await query(queryString)
         } catch (e) {
             errorHandler(e)
             return []
