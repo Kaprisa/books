@@ -1,4 +1,4 @@
-exports.init = app => app.use(async (ctx, next) => {
+export default app => app.use(async (ctx, next) => {
     try {
         await next()
     } catch (e) {

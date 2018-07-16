@@ -1,7 +1,7 @@
-const Book = require('../../db/models/Book')
-const User = require('../../db/models/User')
+import Book from '../../db/models/Book'
+import User from '../../db/models/User'
 
-module.exports = router => {
+export default router => {
     router.put('/:id', async ctx => {
         const body = ctx.request.body
         let fields = {}

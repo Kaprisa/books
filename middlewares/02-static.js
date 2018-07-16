@@ -1,3 +1,3 @@
-const serve = require('koa-static')
+import serve from 'koa-static'
 
-exports.init = app => app.use(serve('public'))
+export default app => app.use(serve('public'))

@@ -1,6 +1,6 @@
-const Book = require('../../db/models/Book')
+import Book from '../../db/models/Book'
 
-module.exports = router => {
+export default router => {
     router.get('/', async ctx => {
         const query = ctx.request.query
         const condition = query.like ? `title LIKE '${query.like}%'` : 1

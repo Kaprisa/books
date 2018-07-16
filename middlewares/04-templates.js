@@ -1,8 +1,8 @@
-const pug = require('pug')
-const config = require('config')
-const path = require('path')
+import pug from 'pug'
+import config from 'config'
+import path from 'path'
 
-exports.init = app => app.use(async function(ctx, next) {
+export default app => app.use(async function(ctx, next) {
     ctx.render = function(templatePath, locals) {
         locals = locals || {}
         locals.public_path = path.resolve(__dirname, '../public')

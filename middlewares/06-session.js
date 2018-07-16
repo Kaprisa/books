@@ -1,7 +1,7 @@
-const session = require('koa-generic-session')
-const convert = require('koa-convert')
+import session from 'koa-generic-session'
+import convert from 'koa-convert'
 
-exports.init = app => app.use(convert(session({
+export default app => app.use(convert(session({
     cookie: {
 
     }

@@ -1,14 +1,15 @@
-const Koa = require('koa')
+import 'babel-polyfill'
+import Koa from 'koa'
 const app = new Koa()
 
-const config = require('config')
+import config from 'config'
 
-const path = require('path')
-const fs = require('fs')
+import path from 'path'
+import fs from 'fs'
 
 const middlewares = fs.readdirSync(path.join(__dirname, 'middlewares')).sort()
-middlewares.forEach(m => require('./middlewares/' + m).init(app))
+middlewares.forEach(m => require('./middlewares/' + m).default(app))
 
-require('./routes')(app)
+require('./routes').default(app)
 
 app.listen(config.get('port'))

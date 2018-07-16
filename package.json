@@ -7,8 +7,8 @@
     "dev": "webpack-dev-server --progress --hide-modules --mode development",
     "watch": "webpack --watch --mode development",
     "build": "webpack --progress --hide-modules --mode production",
-    "start:dev": "nodemon app",
-    "start": "node app",
+    "start:dev": "nodemon index",
+    "start": "node index",
     "db:setup": "node db/setup && node db/seed"
   },
   "dependencies": {
@@ -38,6 +38,7 @@
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.51",
     "@babel/preset-env": "^7.0.0-beta.51",
+    "@babel/register": "^7.0.0-beta.53",
     "autoprefixer": "^8.6.3",
     "babel-loader": "^8.0.0-beta.0",
     "babel-polyfill": "^6.26.0",

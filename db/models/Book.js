@@ -32,7 +32,6 @@ class Book {
         try {
             const queryString = `SELECT b.*, u.name FROM books b JOIN users u ON b.author_id=u.id where ${condition} ORDER BY ${orderBy} ${direction} ${limit ? limit : ''};`
             const cachedBooks = await getCached(queryString)
-            console.log(cachedBooks)
             if (cachedBooks)
                 return cachedBooks
             const books = await query(queryString)

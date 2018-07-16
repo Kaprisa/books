@@ -1,3 +1,3 @@
-const logger = require('koa-logger')
+import logger from 'koa-logger'
 
-exports.init = app => app.use(logger())
+export default app => app.use(logger())

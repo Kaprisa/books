@@ -1,8 +1,8 @@
-const Router = require('koa-router')
+import Router from 'koa-router'
 const router = new Router()
-const makeRoutes = require('./makeRoutes')
+import makeRoutes from './makeRoutes'
 
-module.exports = app => {
+export default app => {
     router.get(/\/([\w])*/, async ctx => {
         ctx.body = await ctx.render('index')
     })

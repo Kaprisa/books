@@ -1,4 +1,4 @@
-const favicon = require('koa-favicon')
-const path = require('path')
+import favicon from 'koa-favicon'
+import path from 'path'
 
-exports.init = app => app.use(favicon(path.resolve(__dirname, '../public/images/favicon.ico')))
+export default app => app.use(favicon(path.resolve(__dirname, '../public/images/favicon.ico')))

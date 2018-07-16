@@ -1,4 +1,4 @@
-const uploader = require('koa2-file-upload')
+import uploader from 'koa2-file-upload'
 
 const options = {
     "url": '/api/upload',
@@ -8,4 +8,4 @@ const options = {
     "folder": "public"
 }
 
-exports.init = app => app.use(uploader(options))
+export default app => app.use(uploader(options))
