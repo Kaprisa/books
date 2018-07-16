@@ -11,7 +11,7 @@ exports.getCached = async (key) => {
     try {
         const cached = await client.get(key)
         if (cached)
-            return JSON.parse(cached)
+            return JSON.parse(JSON.parse(cached).data)
         return null
     } catch (e) {
         errorHandler(e)
@@ -21,7 +21,7 @@ exports.getCached = async (key) => {
 
 exports.setCached = async (key, data) => {
     try {
-        await client.set(key, JSON.stringify(data))
+        await client.set(key, JSON.stringify({data}))
     } catch (e) {
         errorHandler(e)
     }
